@@ -1,0 +1,6 @@
+.leftSidebar {
+    width: 220px;
+    flex: 1 0 auto;
+    display: flex;
+    background-color: darkslategray
+}

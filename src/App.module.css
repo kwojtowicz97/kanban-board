@@ -1,0 +1,28 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+}
+
+.mainLayout {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+}
+
+
+
+.mainContent {
+    width: 100%;
+}
+
+.topNavbar {
+    display: flex;
+    height: 45px;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+}
+
+.canbanGroup {
+    display: flex;
+}
