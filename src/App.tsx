@@ -1,5 +1,6 @@
 import styles from './App.module.css'
 import LeftSidebar from './components/LeftSidebar/LeftSidebar'
+import TopNavbar from './components/TopNavbar/TopNavbar'
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <div className={styles.mainLayout}>
         <LeftSidebar />
         <div className={styles.mainContent}>
-          <div className={styles.topNavbar}></div>
+          <TopNavbar />
           <div className={styles.canbanGroup}></div>
         </div>
       </div>

@@ -1,0 +1,18 @@
+.topNavbar {
+    height: 45px;
+    width: 100%;
+    background: #00000026;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.leftControls {
+    display: block;
+
+}
+
+.rightControls {
+    display: block;
+}
