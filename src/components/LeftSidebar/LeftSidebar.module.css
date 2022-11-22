@@ -2,5 +2,13 @@
     width: 220px;
     flex: 1 0 auto;
     display: flex;
+    flex-direction: column;
     background-color: darkslategray
+}
+
+.projectsListLabel {
+    padding: 0.5rem 1rem 0 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ccc;
 }
