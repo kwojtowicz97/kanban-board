@@ -1,0 +1,38 @@
+.progress {
+    --outer-size: 10px;
+    --size: 45px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--size);
+    height: var(--size);
+    
+}
+
+.progress::after {
+    position: absolute;
+    content: attr(data-progress) "%" ;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.outer {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+
+}
+
+.inner {
+    width: calc(var(--size) - var(--outer-size));
+    height: calc(var(--size) - var(--outer-size));
+    margin: calc(var(--outer-size) / 2);
+    background: var(--bg-topNavbar);
+    border-radius: 50%;
+    
+}
+
+
+
