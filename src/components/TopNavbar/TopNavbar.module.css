@@ -1,7 +1,7 @@
 .topNavbar {
-    height: 45px;
+    height: var(--topHeaderHeight);
     width: 100%;
-    background: #00000026;
+    background: var(--bg-topNavbar);
     border-bottom: 1px solid rgba(0, 0, 0, 0.100);
     display: flex;
     justify-content:space-between;
@@ -9,7 +9,10 @@
 }
 
 .leftControls {
-    display: block;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
