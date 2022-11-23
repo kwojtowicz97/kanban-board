@@ -7,3 +7,11 @@
   box-sizing: border-box;
   font-family: 'Work Sans', sans-serif;
 }
+
+body {
+  --bg-topNavbar: #fff;
+  --bg-sidebarLogo: #254343;
+  --topHeaderHeight: 55px;
+  --mainOrange: #ffa500;
+  --darkGray: #d1d1d1;
+}
