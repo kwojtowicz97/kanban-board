@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import styles from './ProjectName.module.css'
-import ContentEditable from 'react-contenteditable'
+
+const PLACEHOLDER = 'Your project name'
 
 const ProjectName = () => {
   const [projectName, setProjectName] = useState('Project Name')
+
   return (
-    <div className={styles.projectName}>
-      <ContentEditable
-        html={projectName}
-        onChange={(e) => setProjectName(e.target.value)}
-      ></ContentEditable>
-    </div>
+    <input
+      placeholder={PLACEHOLDER}
+      className={styles.projectName}
+      size={Math.max(projectName.length, PLACEHOLDER.length - 1)}
+      type='text'
+      value={projectName}
+      onChange={(e) => setProjectName(e.target.value)}
+    />
   )
 }
 
