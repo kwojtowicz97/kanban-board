@@ -1,0 +1,18 @@
+.filterButton {
+    margin: 0 1rem;
+    padding: 0 1rem;
+    border-left: 1px solid;
+    border-right: 1px solid ;
+    border-color: var(--darkGray);
+}
+
+/* .icon {
+    margin-right: 0.5rem;
+} */
+
+.icon svg {
+    stroke: var(--mainOrange);
+    height: 2rem;
+    width: 2rem;
+    margin: auto;
+}

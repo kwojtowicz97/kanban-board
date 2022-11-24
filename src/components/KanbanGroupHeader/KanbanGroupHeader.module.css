@@ -1,0 +1,13 @@
+.header {
+    height: var(--kanbanHeaderHeight);
+    margin-left: var(--rightsideMarginLeft);
+    display: flex;
+    justify-content: end;
+    padding: 0 1rem;
+}
+
+.rightMenu {
+    display: flex;
+    align-items: center;
+}
+

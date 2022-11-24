@@ -1,0 +1,17 @@
+.viewSelectButton {
+    line-height: 1rem;
+    color: var(--mainOrange);
+    user-select: none;
+    
+}
+
+.icon {
+    margin-right: 0.5rem;
+}
+
+.icon svg {
+    stroke: var(--mainOrange);
+    height: 1rem;
+    width: 1rem;
+    margin: auto;
+}

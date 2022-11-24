@@ -14,4 +14,7 @@ body {
   --topHeaderHeight: 55px;
   --mainOrange: #ffa500;
   --darkGray: #d1d1d1;
+  --kanbanHeaderHeight: 65px;
+  --rightsideMarginLeft: 1rem;
+  --transparentBorder: 1px solid transparent;
 }

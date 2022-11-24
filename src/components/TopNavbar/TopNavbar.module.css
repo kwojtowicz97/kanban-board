@@ -9,11 +9,10 @@
 }
 
 .leftControls {
-    margin-left: 1rem;
+    margin-left: var(--rightsideMarginLeft);
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .rightControls {
