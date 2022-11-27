@@ -7,6 +7,7 @@ import SidebarButton from './SidebarButton'
 const LeftSidebar = () => {
   return (
     <div className={styles.leftSidebar}>
+      {/* <div className={styles.hideButton}>&#60;</div> */}
       <Logo />
       <h2 className={styles.projectsListLabel}>Your projects</h2>
       <ProjectsList>

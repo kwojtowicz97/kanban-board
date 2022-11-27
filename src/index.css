@@ -13,8 +13,13 @@ body {
   --bg-sidebarLogo: #254343;
   --topHeaderHeight: 55px;
   --mainOrange: #ffa500;
+  --mainOrangeTransparent: #ffa50017;
   --darkGray: #d1d1d1;
+  --lightGray: #ececec;
   --kanbanHeaderHeight: 65px;
   --rightsideMarginLeft: 1rem;
   --transparentBorder: 1px solid transparent;
+  --listWidth: 320px;
+  --leftSidebarWidth: 220px;
+  --listTopBandHeight: 45px
 }

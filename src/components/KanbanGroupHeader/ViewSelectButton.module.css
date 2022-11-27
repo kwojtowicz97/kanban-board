@@ -2,6 +2,9 @@
     line-height: 1rem;
     color: var(--mainOrange);
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
 }
 

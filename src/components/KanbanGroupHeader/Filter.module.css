@@ -1,18 +1,24 @@
 .filterButton {
+    cursor: pointer;
     margin: 0 1rem;
-    padding: 0 1rem;
-    border-left: 1px solid;
-    border-right: 1px solid ;
-    border-color: var(--darkGray);
 }
 
-/* .icon {
-    margin-right: 0.5rem;
-} */
+.icon {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem; 
+}
 
 .icon svg {
     stroke: var(--mainOrange);
-    height: 2rem;
-    width: 2rem;
+    height: 1.8rem;
+    width: 1.8rem;
     margin: auto;
+    box-sizing: content-box;
+}
+
+.icon:hover {
+    background-color: var(--mainOrangeTransparent);
 }

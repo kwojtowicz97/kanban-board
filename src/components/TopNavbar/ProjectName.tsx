@@ -10,7 +10,7 @@ const ProjectName = () => {
     <input
       placeholder={PLACEHOLDER}
       className={styles.projectName}
-      size={Math.max(projectName.length, PLACEHOLDER.length - 1)}
+      size={projectName ? Math.max(projectName.length, 2) : PLACEHOLDER.length}
       type='text'
       value={projectName}
       onChange={(e) => setProjectName(e.target.value)}
