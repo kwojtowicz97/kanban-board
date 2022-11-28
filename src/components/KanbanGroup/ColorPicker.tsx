@@ -1,129 +1,34 @@
 import React from 'react'
+import ColorCircle from './ColorCircle'
 import styles from './KanbanGroup.module.css'
 
-const ColorPicker = () => {
+type TColorPickerProps = {
+  badge: string
+}
+
+const ColorPicker = ({ badge }: TColorPickerProps) => {
   return (
     <div className={styles.colorPicker}>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
-      <div
-        style={{
-          background: '#' + Math.floor(Math.random() * 4096).toString(16),
-        }}
-        className={styles.colorCircle}
-      ></div>
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
+      <ColorCircle badge={badge} />
     </div>
   )
 }

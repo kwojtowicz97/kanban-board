@@ -1,8 +1,20 @@
 import React from 'react'
 import styles from './SidebarButton.module.css'
 
-const SidebarButton = () => {
-  return <button className={styles.sidebarButton}>Project</button>
+type TSidebarButtonProps = {
+  projectName: string
+  onClick: React.Dispatch<React.SetStateAction<string>>
+}
+
+const SidebarButton = ({ projectName, onClick }: TSidebarButtonProps) => {
+  return (
+    <button
+      onClick={() => onClick(projectName)}
+      className={styles.sidebarButton}
+    >
+      {projectName}
+    </button>
+  )
 }
 
 export default SidebarButton

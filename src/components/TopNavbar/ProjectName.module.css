@@ -1,4 +1,5 @@
 .projectName {
+    position: relative;
     margin-left: 0.5rem;
     font-weight: 600;
     font-size: 1.4rem;
@@ -11,4 +12,20 @@
 
 .projectName:focus, .projectName:hover {
     border-color: var(--mainOrange);
+}
+
+.warningTooltip {
+    position: absolute;
+    top: 52px;
+    background: var(--mainOrange);
+    padding: 1rem;
+}
+
+.warningTooltip::after {
+    content: url(../Icons/TriangeOrange.svg);
+    fill: var(--mainOrange);
+    width: 15px;
+    position: absolute;
+    top: -15px;
+    left: 35px;
 }

@@ -1,18 +1,18 @@
 import React from 'react'
+import { TList } from '../../providers/KanbanProvider'
 import styles from './KanbanGroup.module.css'
 import Tasks from './Tasks'
 import TopBand from './TopBand'
 
 type TKanbanList = {
-  badge: string
-  badgeColor: string
+  list: TList
 }
 
-const KanbanList = ({ badge, badgeColor }: TKanbanList) => {
+const KanbanList = ({ list }: TKanbanList) => {
   return (
     <div className={styles.list}>
-      <TopBand badge={badge} badgeColor={badgeColor} />
-      <Tasks />
+      <TopBand list={list} />
+      <Tasks {...list} />
     </div>
   )
 }

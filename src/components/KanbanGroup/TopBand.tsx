@@ -2,25 +2,25 @@ import React from 'react'
 import SmallButtonCollapse from './SmallButtonCollapse'
 import styles from './KanbanGroup.module.css'
 import SmallButtonColorWheel from './SmallButtonColorWheel'
+import { TList } from '../../providers/KanbanProvider'
 
 type TTopBand = {
-  badge: string
-  badgeColor: string
+  list: TList
 }
 
-const TopBand = ({ badge, badgeColor }: TTopBand) => {
+const TopBand = ({ list }: TTopBand) => {
   return (
     <div data-visible-on-hidden className={styles.band}>
       <div
         data-visible-on-hidden
-        style={{ backgroundColor: badgeColor }}
+        style={{ backgroundColor: list.badgeColor }}
         className={styles.bagde}
       >
-        {badge}
+        {`${list.badge} (${list.tasks.length})`}
       </div>
       <div data-visible-on-hidden className={styles.rightButtonsGroup}>
-        <SmallButtonCollapse data-visible-on-hidden />
-        <SmallButtonColorWheel />
+        <SmallButtonCollapse list={list} data-visible-on-hidden />
+        <SmallButtonColorWheel list={list} />
       </div>
     </div>
   )

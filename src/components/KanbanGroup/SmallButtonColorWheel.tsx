@@ -1,18 +1,39 @@
-import React from 'react'
-import CollapseIconAll from '../Icons/CollapseIconAll'
+import React, { useContext } from 'react'
+import { KanbanContext, TList } from '../../providers/KanbanProvider'
 import ColorWheelIcon from '../Icons/ColorWheelIcon'
 import ColorPicker from './ColorPicker'
 import styles from './KanbanGroup.module.css'
 
-const SmallButtonColorWheel = () => {
+type TSmallButtonColorWheelProps = {
+  list: TList
+}
+
+const SmallButtonColorWheel = ({ list }: TSmallButtonColorWheelProps) => {
+  const { toggleColorWheel } = useContext(KanbanContext)
+
+  const clickHandler = () => {
+    toggleColorWheel(list.badge)
+  }
   return (
-    <label htmlFor={styles.colorPickerInput} className={styles.button}>
-      <div className={`${styles.icon} ${styles.colorWheelGradient}`}>
+    <div
+      className={[
+        styles.button,
+        list.isColorWheelShown ? styles.colorWheelShow : '',
+      ].join(' ')}
+    >
+      <div
+        onClick={clickHandler}
+        className={`${styles.icon} ${styles.colorWheelGradient}`}
+      >
         <ColorWheelIcon />
       </div>
-      <input id={styles.colorPickerInput} type='checkbox' />
-      <ColorPicker />
-    </label>
+      {list.isColorWheelShown ? (
+        <>
+          <div onClick={clickHandler} className={styles.backshadow}></div>
+          <ColorPicker badge={list.badge} />
+        </>
+      ) : null}
+    </div>
   )
 }
 

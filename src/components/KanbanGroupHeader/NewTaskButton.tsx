@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { KanbanContext } from '../../providers/KanbanProvider'
 import styles from './NewTaskButton.module.css'
 
 const NewTaskButton = () => {
-  return <div className={styles.button}>New task</div>
+  const { setIsNewTaskCardShown } = useContext(KanbanContext)
+  const clickHandler = () => {
+    setIsNewTaskCardShown!(true)
+  }
+  return (
+    <div onClick={clickHandler} className={styles.button}>
+      New task
+    </div>
+  )
 }
 
 export default NewTaskButton

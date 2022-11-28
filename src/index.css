@@ -23,3 +23,8 @@ body {
   --leftSidebarWidth: 220px;
   --listTopBandHeight: 45px
 }
+
+html,
+body {
+  overflow: hidden;
+}

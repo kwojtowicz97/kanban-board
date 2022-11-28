@@ -1,19 +1,20 @@
 import React from 'react'
+import { TTask } from '../../providers/KanbanProvider'
 import styles from './KanbanGroup.module.css'
 
-const Task = () => {
+type TTaskProps = {
+  task: TTask
+}
+
+const Task = ({ task }: TTaskProps) => {
   return (
-    <div
-      onDrag={() => console.log('gragging')}
-      draggable
-      className={styles.task}
-    >
-      <span>Multiple users can be owners of the same task.</span>
+    <div className={styles.task}>
+      <span>{task.title}</span>
       <div className={styles.taskDetails}>
-        <div className={styles.priority}>
+        <div style={{ color: task.priority }} className={styles.priority}>
           <i className='fa-solid fa-circle-exclamation'></i>
         </div>
-        <div className={styles.date}>26-11-2022</div>
+        <div className={styles.date}>{task.date}</div>
       </div>
     </div>
   )

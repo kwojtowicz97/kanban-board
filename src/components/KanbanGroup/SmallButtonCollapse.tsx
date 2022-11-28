@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { KanbanContext, TList } from '../../providers/KanbanProvider'
 import CollapseIconAll from '../Icons/CollapseIconAll'
 import styles from './KanbanGroup.module.css'
 
-const SmallButtonCollapse = () => {
-  const id = String(Math.random())
+type TSmallButtonCollapseProps = {
+  list: TList
+}
+
+const SmallButtonCollapse = ({ list }: TSmallButtonCollapseProps) => {
+  const { toggleIsCollapsed } = useContext(KanbanContext)
+
+  const clickHandler = () => {
+    toggleIsCollapsed(list.badge)
+  }
+
   return (
-    <label data-visible-on-hidden htmlFor={id} className={styles.button}>
-      <input
-        data-visible-on-hidden
-        id={id}
-        className={styles.collapseInput}
-        type='checkbox'
-      />
+    <div
+      onClick={clickHandler}
+      data-visible-on-hidden
+      className={[styles.button, list.isCollapsed ? styles.collapsed : ''].join(
+        ' '
+      )}
+    >
       <div data-visible-on-hidden className={styles.icon}>
         <CollapseIconAll />
       </div>
-    </label>
+    </div>
   )
 }
 
