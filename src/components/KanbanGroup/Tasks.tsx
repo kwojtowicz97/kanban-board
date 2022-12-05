@@ -1,18 +1,20 @@
 import React from 'react'
-import { TTask } from '../../providers/KanbanProvider'
+import { TList, TTask } from '../../providers/KanbanProvider'
 import styles from './KanbanGroup.module.css'
 import Task from './Task'
+import TaskTarget from './TaskTarget'
 
 type TTasksProps = {
-  tasks: TTask[]
+  list: TList
 }
 
-const Tasks = ({ tasks }: TTasksProps) => {
+const Tasks = ({ list }: TTasksProps) => {
   return (
     <div className={styles.tasks}>
-      {tasks.map((task) => (
+      {list.tasks.map((task) => (
         <Task key={task.title} task={task} />
       ))}
+      <TaskTarget list={list} />
     </div>
   )
 }

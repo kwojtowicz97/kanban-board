@@ -56,6 +56,7 @@ const NewTaskCard = () => {
         description: draftToHtml(convertToRaw(editorState.getCurrentContent())),
         priority: priorityInput,
         date: dateInput,
+        list: columnInput,
       },
       columnInput
     )

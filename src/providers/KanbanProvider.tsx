@@ -12,6 +12,7 @@ export type TTask = {
   description?: string
   priority: Priority
   date: string
+  list: string
 }
 
 export type TList = {
@@ -38,6 +39,8 @@ export type TKanbanContext = {
   addNewTask: (newTask: TTask, badgeName: string) => void
   isNewTaskCardShown: boolean
   setIsNewTaskCardShown: React.Dispatch<React.SetStateAction<boolean>> | null
+  dragAndDropHandler: (dragged: TTask, draggedOver: TTask) => void
+  pushToList: (badge: string, item: TTask) => void
 }
 
 export const KanbanContext = React.createContext<TKanbanContext>({
@@ -51,6 +54,8 @@ export const KanbanContext = React.createContext<TKanbanContext>({
   addNewTask: (newTask: TTask, badgeName: string) => {},
   isNewTaskCardShown: false,
   setIsNewTaskCardShown: null,
+  dragAndDropHandler: (dragged: TTask, draggedOver: TTask) => {},
+  pushToList: (badge: string, item: TTask) => {},
 })
 
 type TKanbanProviderProps = {
@@ -135,6 +140,98 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
     setIsNewTaskCardShown!(false)
   }
 
+  const dragAndDropHandler = (dragged: TTask, draggedOver: TTask) => {
+    setProjects((state) => {
+      // debugger
+      if (dragged === draggedOver) return state
+
+      const currentProj = state.find(
+        (proj) => proj.projectName === currentProject
+      )
+
+      if (!currentProj) return state
+
+      const draggedFromList = currentProj.lists.find(
+        (list) => list.badge === dragged.list
+      )
+
+      const draggedOverList = currentProj.lists.find(
+        (list) => list.badge === draggedOver.list
+      )
+
+      if (!draggedFromList || !draggedOverList) return state
+
+      const draggedObj = draggedFromList.tasks.find(
+        (task) => task.title === dragged.title
+      )
+
+      const draggedOverObj = draggedOverList.tasks.find(
+        (task) => task.title === draggedOver.title
+      )
+
+      if (!draggedObj || !draggedOverObj) return state
+
+      draggedObj.list = draggedOverList.badge
+
+      draggedFromList.tasks = draggedFromList.tasks.filter(
+        (task) => task.title !== dragged.title
+      )
+
+      const index = draggedOverList.tasks.indexOf(draggedOverObj)
+
+      console.log(index)
+
+      draggedOverList.tasks = draggedOverList.tasks.filter(
+        (task) => task.title !== dragged.title
+      )
+
+      draggedOverList.tasks.splice(index, 0, dragged)
+
+      return [...state]
+    })
+  }
+
+  const pushToList = (badge: string, item: TTask) => {
+    setProjects((state) => {
+      // debugger
+      const currentProj = state.find(
+        (proj) => proj.projectName === currentProject
+      )
+
+      if (!currentProj) return state
+
+      const draggedFromList = currentProj.lists.find(
+        (list) => list.badge === item.list
+      )
+
+      const draggedOverList = currentProj.lists.find(
+        (list) => list.badge === badge
+      )
+
+      if (!draggedFromList || !draggedOverList) return state
+
+      const draggedObj = draggedFromList.tasks.find(
+        (task) => task.title === item.title
+      )
+
+      if (!draggedObj) return state
+
+      draggedObj.list = draggedOverList.badge
+
+      draggedFromList.tasks = draggedFromList.tasks.filter(
+        (task) => task.title !== item.title
+      )
+
+      draggedOverList.tasks = draggedOverList.tasks.filter(
+        (task) => task.title !== item.title
+      )
+
+      draggedOverList.tasks.push(item)
+
+      return [...state]
+    })
+  }
+
   return (
     <KanbanContext.Provider
       value={{
@@ -148,6 +245,8 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         addNewTask,
         isNewTaskCardShown,
         setIsNewTaskCardShown,
+        dragAndDropHandler,
+        pushToList,
       }}
     >
       {children}

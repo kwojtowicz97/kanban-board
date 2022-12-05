@@ -12,7 +12,7 @@ const KanbanList = ({ list }: TKanbanList) => {
   return (
     <div className={styles.list}>
       <TopBand list={list} />
-      <Tasks {...list} />
+      <Tasks list={list} />
     </div>
   )
 }
