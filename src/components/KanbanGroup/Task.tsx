@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import { DnDContext } from '../../providers/DnDProvider'
-import { KanbanContext, TTask } from '../../providers/KanbanProvider'
+import {
+  KanbanContext,
+  priorityColors,
+  TTask,
+} from '../../providers/KanbanProvider'
 import styles from './KanbanGroup.module.css'
 
 type TTaskProps = {
@@ -9,8 +12,7 @@ type TTaskProps = {
 }
 
 const Task = ({ task }: TTaskProps) => {
-  const { setCurrentProject, currentProject, dragAndDropHandler } =
-    useContext(KanbanContext)
+  const { dragAndDropHandler, setSelectedTask } = useContext(KanbanContext)
 
   const [{ isDragged }, drag] = useDrag({
     type: 'task',
@@ -45,11 +47,14 @@ const Task = ({ task }: TTaskProps) => {
                   className={styles.placeholder}
                 ></div>
               ) : null}
-              <div className={styles.task}>
+              <div
+                onClick={() => setSelectedTask!(task)}
+                className={styles.task}
+              >
                 <span>{task.title}</span>
                 <div className={styles.taskDetails}>
                   <div
-                    style={{ color: task.priority }}
+                    style={{ color: priorityColors[task.priority] }}
                     className={styles.priority}
                   >
                     <i className='fa-solid fa-circle-exclamation'></i>

@@ -6,7 +6,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 99;  
+    z-index: 99;
 }
 
 .backshadow {
@@ -19,7 +19,6 @@
     animation-name: cardScreen;
     animation-duration: 0.4s;
     animation-fill-mode: forwards
-    
 }
 
 @keyframes cardScreen {
@@ -36,6 +35,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+    height: 100%;
     background: white;
     position: relative;
     animation-name: cardTranslateX;
@@ -45,46 +45,41 @@
 }
 
 @keyframes cardTranslateX {
-    0% {transform: translateX(100%);}
-    100% {transform: translateX(0%);}
+    0% {
+        transform: translateX(90%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
 }
-
-
 
 .title {
     width: 100%;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     height: var(--topHeaderHeight);
     background: rgb(248, 248, 248);
     border-bottom: 1px solid rgba(0, 0, 0, 0.100);
-}
-
-.titleText {
     font-size: 1.2rem;
-    margin-left: 2rem;
+    padding-left: 2rem;
 }
 
-.formWrapper {
-    padding: 1rem 2rem;
+.form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
-.newTaskForm textarea {
-    font-size: 1rem;
-    color: black;
-    width: 100%;
-    border: 1px solid var(--mainOrange);
-    border-radius: 5px;
-    display: block;
-    height: 100px;
-    padding: 0.5rem;
-    resize: none;
-    background-color: white;
-    transition: background-color 500ms ease;
+.content {
+    flex: auto;
+    overflow-y: scroll;
 }
 
 .inputGroup {
-    margin: 1rem 0;
+    margin: 1rem 2rem;
 }
 
 .inputGroup label {
@@ -92,18 +87,14 @@
     margin-bottom: 0.5rem;
 }
 
-.inputGroup select, .inputGroup input {
+.inputGroup select,
+.inputGroup input {
     width: 100%;
     display: block;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid var(--mainOrange);
     border-radius: 5px;
-}
-
-.fromContainer {
-    flex-grow: 1;
-    overflow-y: scroll;
 }
 
 .buttons {
@@ -133,8 +124,4 @@
 .buttons button.addTask {
     background: var(--mainOrange);
     margin-left: 1rem;
-}
-
-.invalid {
-    background-color: rgba(255, 0, 0, 0.494) !important;
 }

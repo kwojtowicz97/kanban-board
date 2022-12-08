@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { data } from '../data'
+import { EditorState } from 'draft-js'
 
-export enum Priority {
-  LOW = 'green',
-  MEDIUM = 'orange',
-  HIGH = 'red',
+export const priorityColors = {
+  low: 'green',
+  medium: 'orange',
+  high: 'red',
 }
 
 export type TTask = {
   title: string
-  description?: string
-  priority: Priority
+  description?: EditorState
+  priority: keyof typeof priorityColors
   date: string
   list: string
 }
@@ -37,10 +38,13 @@ export type TKanbanContext = {
   setListColor: (badgeName: string, color: string) => void
   setProjectName: (projectName: string, newName: string) => void
   addNewTask: (newTask: TTask, badgeName: string) => void
+  updateTask: (oldTask: TTask, newTask: TTask, badgeName: string) => void
   isNewTaskCardShown: boolean
   setIsNewTaskCardShown: React.Dispatch<React.SetStateAction<boolean>> | null
   dragAndDropHandler: (dragged: TTask, draggedOver: TTask) => void
   pushToList: (badge: string, item: TTask) => void
+  selectedTask: TTask | null
+  setSelectedTask: Dispatch<SetStateAction<TTask | null>> | null
 }
 
 export const KanbanContext = React.createContext<TKanbanContext>({
@@ -52,10 +56,13 @@ export const KanbanContext = React.createContext<TKanbanContext>({
   setListColor: (badgeName: string) => {},
   setProjectName: (projectName: string, newName: string) => {},
   addNewTask: (newTask: TTask, badgeName: string) => {},
+  updateTask: (oldTask: TTask, newTask: TTask, badgeName: string) => {},
   isNewTaskCardShown: false,
   setIsNewTaskCardShown: null,
   dragAndDropHandler: (dragged: TTask, draggedOver: TTask) => {},
   pushToList: (badge: string, item: TTask) => {},
+  selectedTask: null,
+  setSelectedTask: null,
 })
 
 type TKanbanProviderProps = {
@@ -65,6 +72,7 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
   const [currentProject, setCurrentProject] = useState('First project')
   const [projects, setProjects] = useState<TProject[]>(data)
   const [isNewTaskCardShown, setIsNewTaskCardShown] = useState(false)
+  const [selectedTask, setSelectedTask] = useState<TTask | null>(null)
 
   const toggleIsCollapsed = (badgeName: string) => {
     setProjects((projects) => {
@@ -138,6 +146,38 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
       return [...projects]
     })
     setIsNewTaskCardShown!(false)
+  }
+
+  const updateTask = (oldTask: TTask, newTask: TTask, badgeName: string) => {
+    const currentProj = projects.find(
+      (project) => project.projectName === currentProject
+    )
+    if (!currentProj) return projects
+    const currentList = currentProj.lists.find(
+      (list) => list.badge === oldTask.list
+    )
+    if (!currentList) return projects
+    if (oldTask.list === newTask.list) {
+      setProjects((projects) => {
+        currentList.tasks = currentList?.tasks.map((task) =>
+          task.title === oldTask.title ? newTask : task
+        )
+
+        return [...projects]
+      })
+    } else {
+      setProjects((projects) => {
+        currentList.tasks = currentList.tasks.filter(
+          (task) => task.title !== oldTask.title
+        )
+        console.log(currentList)
+        console.log(projects)
+        return [...projects]
+      })
+      addNewTask(newTask, badgeName)
+    }
+
+    setSelectedTask(null)
   }
 
   const dragAndDropHandler = (dragged: TTask, draggedOver: TTask) => {
@@ -243,10 +283,13 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         setListColor,
         setProjectName,
         addNewTask,
+        updateTask,
         isNewTaskCardShown,
         setIsNewTaskCardShown,
         dragAndDropHandler,
         pushToList,
+        selectedTask,
+        setSelectedTask,
       }}
     >
       {children}

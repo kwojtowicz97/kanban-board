@@ -1,10 +1,6 @@
-export enum Priority {
-  LOW = 'green',
-  MEDIUM = 'orange',
-  HIGH = 'red',
-}
+import { TProject } from './providers/KanbanProvider'
 
-export const data = [
+export const data: TProject[] = [
   {
     projectName: 'First project',
     lists: [
@@ -17,7 +13,7 @@ export const data = [
           {
             title: 'First task',
             date: '22-11-2022',
-            priority: Priority.HIGH,
+            priority: 'high',
             list: 'Open',
           },
         ],
@@ -31,13 +27,13 @@ export const data = [
           {
             title: 'Second task',
             date: '22-11-2022',
-            priority: Priority.LOW,
+            priority: 'low',
             list: 'In progress',
           },
           {
             title: 'Test task',
             date: '22-11-2022',
-            priority: Priority.LOW,
+            priority: 'low',
             list: 'In progress',
           },
         ],
@@ -51,7 +47,7 @@ export const data = [
           {
             title: 'Third task',
             date: '22-11-2022',
-            priority: Priority.MEDIUM,
+            priority: 'medium',
             list: 'Testing',
           },
         ],
