@@ -58,6 +58,7 @@ export type TKanbanContext = {
   addNewProject: () => void
   isListView: boolean
   setIsListView: Dispatch<SetStateAction<boolean>> | null
+  renameBagde: (oldBagde: string, name: string) => void
   sortBy: TSortBy
   setSortBy: Dispatch<SetStateAction<TSortBy>> | null
   reverseSort: boolean
@@ -95,6 +96,7 @@ export const KanbanContext = React.createContext<TKanbanContext>({
   setSelectedTask: null,
   getCurrentProject: () => undefined,
   addNewProject: () => {},
+  renameBagde: (oldBagde: string, name: string) => {},
   isListView: false,
   setIsListView: null,
   sortBy: 'title',
@@ -152,6 +154,21 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
     })
     setCurrentProject(name)
     projectNameRef.current?.focus()
+  }
+
+  const renameBagde = (oldBagde: string, name: string) => {
+    setProjects((state) => {
+      const newState = [...state]
+      const project = newState.find(
+        (project) => project.projectName === currentProject
+      )
+      if (!project) return state
+      const list = project.lists.find((list) => list.badge === oldBagde)
+      if (!list) return state
+      list.badge = name
+      list.tasks.forEach((task) => (task.list = name))
+      return newState
+    })
   }
 
   const toggleIsCollapsed = (badgeName: string) => {
@@ -372,6 +389,7 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         setSortBy,
         reverseSort,
         setReverseSort,
+        renameBagde,
         projectNameRef,
         filters: {
           isFiltersShown,

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { KanbanContext } from '../../providers/KanbanProvider'
 import styles from './KanbanView.module.css'
 import KanbanList from './KanbanList'
+import AddListCard from './AddListCard'
 
 const KanbanView = () => {
   const { projects, currentProject } = useContext(KanbanContext)
@@ -17,6 +18,7 @@ const KanbanView = () => {
       {lists.map((list) => (
         <KanbanList key={list.badge} list={list} />
       ))}
+      <AddListCard />
     </div>
   )
 }
