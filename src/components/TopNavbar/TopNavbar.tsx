@@ -7,7 +7,7 @@ const TopNavbar = () => {
   return (
     <div className={styles.topNavbar}>
       <div className={styles.leftControls}>
-        {/* <ProgressBar /> */}
+        <ProgressBar />
         <ProjectName />
       </div>
       <div className={styles.rightControls}></div>

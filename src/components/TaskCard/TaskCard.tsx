@@ -55,6 +55,7 @@ const TaskCard = ({ task }: TTaskCard) => {
           submitHandler={submitHandler}
           closeHandler={closeHandler}
           submitButtonText={!!task ? 'Update task' : 'Add task'}
+          task={task}
         >
           <InputField
             type='text'

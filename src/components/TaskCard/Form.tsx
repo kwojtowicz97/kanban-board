@@ -2,12 +2,14 @@ import React from 'react'
 import styles from './TaskCard.module.css'
 import { EditorState } from 'draft-js'
 import RichTextEditor from '../RichTextEditor/RichTextEditor'
+import { TTask } from '../../providers/KanbanProvider'
 
 type TForm = {
   children: React.ReactNode
   submitHandler: (e: React.FormEvent<HTMLFormElement>) => void
   closeHandler: () => void
   submitButtonText: string
+  task?: TTask
 }
 
 type TFormFieldProps = {
@@ -46,10 +48,11 @@ export const Form = ({
   children,
   submitHandler,
   closeHandler,
+  task,
 }: TForm) => {
   return (
     <form onSubmit={submitHandler} className={styles.form}>
-      <div className={styles.title}>New task</div>
+      <div className={styles.title}>{task ? 'Task preview' : 'New task'}</div>
       <div className={styles.content}>{children}</div>
       <div className={styles.buttons}>
         <button type={'button'} onClick={closeHandler}>

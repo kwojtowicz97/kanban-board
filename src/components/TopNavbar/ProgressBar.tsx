@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { KanbanContext, TTask } from '../../providers/KanbanProvider'
 import styles from './ProgressBar.module.css'
 
@@ -17,21 +17,25 @@ const ProgressBar = () => {
     []
   )
 
-  const noOfLists = currentProj.lists.length
-  let progressAngle = 0
+  if (allTasks.length > 0) {
+    const noOfLists = currentProj.lists.length
 
-  if (!(allTasks.length === 0)) {
     const finishedTasks = currentProj.lists[noOfLists - 1].tasks.length
-    if (finishedTasks / allTasks.length - progress > 0.005) {
-      setTimeout(() => setProgress((state) => state + 0.002), 5)
-    } else if (finishedTasks / allTasks.length - progress < -0.005) {
-      setTimeout(() => setProgress((state) => state - 0.002), 5)
+
+    if (!(allTasks.length === 0)) {
+      if (finishedTasks / allTasks.length - progress > 0.005) {
+        setTimeout(() => setProgress((state) => state + 0.002), 5)
+      } else if (finishedTasks / allTasks.length - progress < -0.005) {
+        setTimeout(() => setProgress((state) => state - 0.002), 5)
+      }
     }
-    progressAngle = progress * 360
-  } else {
-    setProgress(0)
   }
 
+  useEffect(() => {
+    setProgress(0)
+  }, [currentProject])
+
+  const progressAngle = progress * 360
   return (
     <div data-progress={Math.round(progress * 100)} className={styles.progress}>
       <div
