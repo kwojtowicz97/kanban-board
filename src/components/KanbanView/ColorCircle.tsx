@@ -4,11 +4,11 @@ import styles from './KanbanView.module.css'
 
 type TColorCircleProps = {
   badge: string
+  color: string
 }
 
-const ColorCircle = ({ badge }: TColorCircleProps) => {
+const ColorCircle = ({ badge, color }: TColorCircleProps) => {
   const { setListColor } = useContext(KanbanContext)
-  const color = '#' + Math.floor(Math.random() * 4096).toString(16)
 
   const clickHandler = () => {
     setListColor(badge, color)

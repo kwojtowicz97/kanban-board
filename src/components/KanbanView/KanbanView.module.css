@@ -56,6 +56,10 @@
     transform: rotate(180deg);
 }
 
+.bagde input {
+    cursor:text;
+}
+
 .button {
     width: 25px;
     height: 25px;
@@ -101,6 +105,7 @@
     font-weight: 600;
     cursor: default;
     white-space: nowrap;
+    position: relative;
 }
 
 .rightButtonsGroup {
@@ -222,12 +227,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     height: 100%;
 }
 
 .addIcon > i {
-    font-size: 4rem;
+    font-size: 2rem;
 }
 
 .wrapper {
@@ -250,4 +255,21 @@
 .newList {
     background-color: transparent;
     box-shadow: inset 0 0 2px 1px #bfbfbf;
+}
+
+.warningTooltip {
+    position: absolute;
+    top: 82px;
+    background: var(--mainOrange);
+    padding: 1rem;
+    z-index: 99;
+}
+
+.warningTooltip::after {
+    content: url(../Icons/TriangeOrange.svg);
+    fill: var(--mainOrange);
+    width: 15px;
+    position: absolute;
+    top: -15px;
+    left: 45px;
 }

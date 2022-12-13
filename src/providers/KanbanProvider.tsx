@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { data } from '../data'
 import { EditorState } from 'draft-js'
+import { colors } from '../components/KanbanView/ColorPicker'
 
 export const priorityColors = {
   Low: 'green',
@@ -63,6 +64,7 @@ export type TKanbanContext = {
   setSortBy: Dispatch<SetStateAction<TSortBy>> | null
   reverseSort: boolean
   setReverseSort: Dispatch<SetStateAction<boolean>> | null
+  addNewList: () => void
   projectNameRef: React.MutableRefObject<HTMLInputElement | null> | null
   filters: {
     isFiltersShown: boolean
@@ -104,6 +106,7 @@ export const KanbanContext = React.createContext<TKanbanContext>({
   reverseSort: false,
   setReverseSort: null,
   projectNameRef: null,
+  addNewList: () => {},
   filters: {
     isFiltersShown: false,
     setIsFiltersShown: null,
@@ -146,7 +149,13 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
   }
 
   const addNewProject = () => {
-    const name = `New project #${Math.ceil(Math.random() * 1000)}`
+    let no = 1
+    while (
+      projects.some((project) => project.projectName === `New project ${no}`)
+    ) {
+      no = no + 1
+    }
+    const name = `New project ${no}`
     setProjects((state) => {
       const newState = [...state]
       newState.push({ projectName: name, lists: [] })
@@ -183,6 +192,28 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
       if (!currentList) return projects
       currentList.isCollapsed = !currentList.isCollapsed
       return [...projects]
+    })
+  }
+
+  const addNewList = () => {
+    setProjects((state) => {
+      const newState = [...state]
+      const project = newState.find(
+        (project) => project.projectName === currentProject
+      )
+      if (!project) return state
+      let no = 1
+      while (project.lists.some((list) => list.badge === `New list ${no}`)) {
+        no = no + 1
+      }
+      project.lists.push({
+        badge: `New list ${no}`,
+        badgeColor: colors[Math.ceil(Math.random() * colors.length)],
+        isCollapsed: false,
+        isColorWheelShown: false,
+        tasks: [],
+      })
+      return newState
     })
   }
 
@@ -381,6 +412,7 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         pushToList,
         selectedTask,
         setSelectedTask,
+        addNewList,
         getCurrentProject,
         addNewProject,
         isListView,
