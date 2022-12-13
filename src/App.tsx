@@ -1,12 +1,12 @@
 import styles from './App.module.css'
-import KanbanGroup from './components/KanbanGroup/KanbanGroup'
-import KanbanGroupHeader from './components/KanbanGroupHeader/KanbanGroupHeader'
+import TasksHeader from './components/TasksHeader/TasksHeader'
 import LeftSidebar from './components/LeftSidebar/LeftSidebar'
 import NewTaskCard from './components/NewTaskCard/NewTaskCard'
 import TaskPreview from './components/TaskPreview/TaskPreview'
 import TopNavbar from './components/TopNavbar/TopNavbar'
 import DnDProvider from './providers/DnDProvider'
 import KanbanProvider from './providers/KanbanProvider'
+import { Tasks } from './components/Tasks/Tasks'
 
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
           <LeftSidebar />
           <div className={styles.mainContent}>
             <TopNavbar />
-            <KanbanGroupHeader />
+            <TasksHeader />
             <DnDProvider>
-              <KanbanGroup />
+              <Tasks />
             </DnDProvider>
           </div>
         </div>

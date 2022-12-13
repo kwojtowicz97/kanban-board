@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { KanbanContext, TList } from '../../providers/KanbanProvider'
 import ColorWheelIcon from '../Icons/ColorWheelIcon'
 import ColorPicker from './ColorPicker'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 
 type TSmallButtonColorWheelProps = {
   list: TList

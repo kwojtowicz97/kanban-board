@@ -129,6 +129,7 @@
     box-shadow: inset 0px 0px 2px 1px rgb(187 187 187);
     margin: 0.5rem 0;
     color: #616161;
+    cursor: pointer;
 }
 
 .placeholder {

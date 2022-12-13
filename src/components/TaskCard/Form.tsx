@@ -1,10 +1,11 @@
-import { RefObject } from 'react'
-import ButtonsContainer from './ButtonsContainer'
+import React from 'react'
 import styles from './TaskCard.module.css'
+import { EditorState } from 'draft-js'
+import RichTextEditor from '../RichTextEditor/RichTextEditor'
 
 type TForm = {
   children: React.ReactNode
-  submitHanddler: () => void
+  submitHandler: (e: React.FormEvent<HTMLFormElement>) => void
   closeHandler: () => void
   submitButtonText: string
 }
@@ -12,9 +13,10 @@ type TForm = {
 type TFormFieldProps = {
   className?: string
   labelClassName?: string
-  label: string
+  label?: string
   name: string
   children?: React.ReactNode
+  style?: React.CSSProperties
 }
 
 interface TInputFieldProps extends TFormFieldProps {
@@ -31,22 +33,32 @@ interface TSelectFieldProps extends TFormFieldProps {
   value: string
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
   required?: boolean
+  selectStyle?: React.CSSProperties
+}
+
+interface TRichTextEditorProps extends TFormFieldProps {
+  value: EditorState
+  onChange: (editorState: EditorState) => void
 }
 
 export const Form = ({
   submitButtonText,
   children,
-  submitHanddler,
+  submitHandler,
   closeHandler,
 }: TForm) => {
   return (
-    <form onSubmit={submitHanddler} className={styles.form}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <div className={styles.title}>New task</div>
       <div className={styles.content}>{children}</div>
-      <ButtonsContainer
-        closeHandler={closeHandler}
-        buttonText={submitButtonText}
-      />
+      <div className={styles.buttons}>
+        <button type={'button'} onClick={closeHandler}>
+          Cancel
+        </button>
+        <button type={'submit'} className={styles.addTask}>
+          {submitButtonText}
+        </button>
+      </div>
     </form>
   )
 }
@@ -57,12 +69,15 @@ export const FormFieldWrapper = ({
   label,
   name,
   children,
+  style,
 }: TFormFieldProps) => {
   return (
-    <div className={className || styles.inputGroup}>
-      <label className={labelClassName} htmlFor={name}>
-        {label}
-      </label>
+    <div style={style} className={className || styles.inputGroup}>
+      {label ? (
+        <label className={labelClassName} htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       {children}
     </div>
   )
@@ -78,9 +93,11 @@ export const InputField = ({
   value,
   required,
   onChange,
+  style,
 }: TInputFieldProps) => {
   return (
     <FormFieldWrapper
+      style={style}
       labelClassName={labelClassName}
       name={name}
       label={label}
@@ -108,15 +125,19 @@ export const SelectField = ({
   required,
   onChange,
   values,
+  selectStyle,
+  style,
 }: TSelectFieldProps) => {
   return (
     <FormFieldWrapper
+      style={style}
       label={label}
       name={name}
       className={className}
       labelClassName={labelClassName}
     >
       <select
+        style={selectStyle}
         className={selectClassName}
         name={name}
         value={value}
@@ -124,9 +145,33 @@ export const SelectField = ({
         onChange={onChange}
       >
         {values.map((value) => (
-          <option value={value}>{value}</option>
+          <option key={value + Math.random()} value={value}>
+            {value}
+          </option>
         ))}
       </select>
+    </FormFieldWrapper>
+  )
+}
+
+export const RichTextEditorField = ({
+  label,
+  name,
+  className,
+  labelClassName,
+  onChange,
+  value,
+  style,
+}: TRichTextEditorProps) => {
+  return (
+    <FormFieldWrapper
+      style={style}
+      className={className}
+      labelClassName={labelClassName}
+      label={label}
+      name={name}
+    >
+      <RichTextEditor onChange={onChange} value={value} />
     </FormFieldWrapper>
   )
 }

@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
-import { DnDContext } from '../../providers/DnDProvider'
+import { useDrop } from 'react-dnd'
 import { KanbanContext, TList, TTask } from '../../providers/KanbanProvider'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 
 type TTaskTargerProps = {
   list: TList

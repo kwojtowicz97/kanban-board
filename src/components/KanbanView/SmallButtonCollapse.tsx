@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { KanbanContext, TList } from '../../providers/KanbanProvider'
 import CollapseIconAll from '../Icons/CollapseIconAll'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 
 type TSmallButtonCollapseProps = {
   list: TList

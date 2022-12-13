@@ -1,6 +1,6 @@
 import React from 'react'
 import { TList } from '../../providers/KanbanProvider'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 import Tasks from './Tasks'
 import TopBand from './TopBand'
 

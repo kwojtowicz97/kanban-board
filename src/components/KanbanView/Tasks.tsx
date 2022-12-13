@@ -1,6 +1,6 @@
 import React from 'react'
-import { TList, TTask } from '../../providers/KanbanProvider'
-import styles from './KanbanGroup.module.css'
+import { TList } from '../../providers/KanbanProvider'
+import styles from './KanbanView.module.css'
 import Task from './Task'
 import TaskTarget from './TaskTarget'
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { KanbanContext } from '../../providers/KanbanProvider'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 
 type TColorCircleProps = {
   badge: string

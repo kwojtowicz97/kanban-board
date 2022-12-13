@@ -1,0 +1,62 @@
+.group {
+    padding: 2rem 2rem;
+    height: calc(100% - var(--topHeaderHeight) - var(--kanbanHeaderHeight));
+    /* background: var(--lightGreen); */
+}
+
+.tasksList {
+    list-style: none;
+    height: 100%;
+    border-radius: 1rem;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    background: white;
+    margin: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 2px 1px rgb(187 187 187);
+}
+.task:hover {
+    box-shadow: 0px 0px 1px 1px rgb(187 187 187)
+}
+
+.rightSide {
+    display: flex;
+    align-items: center;
+}
+
+.rightSide > div {
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0.5rem;
+}
+
+.priority {
+    display: block;
+    width: auto !important;
+}
+
+.date {
+    width: 10ch;
+    text-align: center;
+}
+
+.bagde {
+    padding: 0 1rem;
+    height: 26px;
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: white; */
+    /* background-color: aquamarine; */
+    cursor: default;
+    white-space: nowrap;
+}

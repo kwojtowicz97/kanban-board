@@ -1,11 +1,23 @@
+.wrapper {
+    width: 10rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .viewSelectButton {
     line-height: 1rem;
     color: var(--mainOrange);
     user-select: none;
     display: flex;
-    justify-content: center;
     align-items: center;
-    
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 5px;
+
+}
+
+.viewSelectButton:hover {
+    background-color: var(--mainOrangeTransparent);
 }
 
 .icon {

@@ -3,10 +3,19 @@ import { data } from '../data'
 import { EditorState } from 'draft-js'
 
 export const priorityColors = {
-  low: 'green',
-  medium: 'orange',
-  high: 'red',
+  Low: 'green',
+  Medium: 'orange',
+  High: 'red',
 }
+
+export const sortByValues = {
+  title: 'title',
+  date: 'date',
+  list: 'list',
+  prority: 'prority',
+}
+
+export type TSortBy = keyof typeof sortByValues
 
 export type TTask = {
   title: string
@@ -45,6 +54,25 @@ export type TKanbanContext = {
   pushToList: (badge: string, item: TTask) => void
   selectedTask: TTask | null
   setSelectedTask: Dispatch<SetStateAction<TTask | null>> | null
+  getCurrentProject: () => TProject | undefined
+  isListView: boolean
+  setIsListView: Dispatch<SetStateAction<boolean>> | null
+  sortBy: TSortBy
+  setSortBy: Dispatch<SetStateAction<TSortBy>> | null
+  reverseSort: boolean
+  setReverseSort: Dispatch<SetStateAction<boolean>> | null
+  filters: {
+    isFiltersShown: boolean
+    setIsFiltersShown: Dispatch<SetStateAction<boolean>> | null
+    filteredLists: string[]
+    setFilteredLists: Dispatch<SetStateAction<string[]>> | null
+    filteredStartDate: string
+    setFilteredStartDate: Dispatch<SetStateAction<string>> | null
+    filteredEndDate: string
+    setFilteredEndDate: Dispatch<SetStateAction<string>> | null
+    filteredPriority: string[]
+    setFilteredPriority: Dispatch<SetStateAction<string[]>> | null
+  }
 }
 
 export const KanbanContext = React.createContext<TKanbanContext>({
@@ -63,6 +91,25 @@ export const KanbanContext = React.createContext<TKanbanContext>({
   pushToList: (badge: string, item: TTask) => {},
   selectedTask: null,
   setSelectedTask: null,
+  getCurrentProject: () => undefined,
+  isListView: false,
+  setIsListView: null,
+  sortBy: 'title',
+  setSortBy: null,
+  reverseSort: false,
+  setReverseSort: null,
+  filters: {
+    isFiltersShown: false,
+    setIsFiltersShown: null,
+    filteredLists: [],
+    setFilteredLists: null,
+    filteredStartDate: 'string',
+    setFilteredStartDate: null,
+    filteredEndDate: 'string',
+    setFilteredEndDate: null,
+    filteredPriority: [],
+    setFilteredPriority: null,
+  },
 })
 
 type TKanbanProviderProps = {
@@ -73,6 +120,18 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
   const [projects, setProjects] = useState<TProject[]>(data)
   const [isNewTaskCardShown, setIsNewTaskCardShown] = useState(false)
   const [selectedTask, setSelectedTask] = useState<TTask | null>(null)
+  const [isListView, setIsListView] = useState<boolean>(false)
+  const [sortBy, setSortBy] = useState<TSortBy>('title')
+  const [reverseSort, setReverseSort] = useState<boolean>(false)
+  const [isFiltersShown, setIsFiltersShown] = useState<boolean>(false)
+  const [filteredLists, setFilteredLists] = useState<string[]>([])
+  const [filteredStartDate, setFilteredStartDate] = useState<string>('')
+  const [filteredEndDate, setFilteredEndDate] = useState<string>('')
+  const [filteredPriority, setFilteredPriority] = useState<string[]>([])
+
+  const getCurrentProject = () => {
+    return projects.find((project) => project.projectName === currentProject)
+  }
 
   const toggleIsCollapsed = (badgeName: string) => {
     setProjects((projects) => {
@@ -170,8 +229,6 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         currentList.tasks = currentList.tasks.filter(
           (task) => task.title !== oldTask.title
         )
-        console.log(currentList)
-        console.log(projects)
         return [...projects]
       })
       addNewTask(newTask, badgeName)
@@ -182,7 +239,6 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
 
   const dragAndDropHandler = (dragged: TTask, draggedOver: TTask) => {
     setProjects((state) => {
-      // debugger
       if (dragged === draggedOver) return state
 
       const currentProj = state.find(
@@ -219,8 +275,6 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
 
       const index = draggedOverList.tasks.indexOf(draggedOverObj)
 
-      console.log(index)
-
       draggedOverList.tasks = draggedOverList.tasks.filter(
         (task) => task.title !== dragged.title
       )
@@ -233,7 +287,6 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
 
   const pushToList = (badge: string, item: TTask) => {
     setProjects((state) => {
-      // debugger
       const currentProj = state.find(
         (proj) => proj.projectName === currentProject
       )
@@ -290,6 +343,25 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         pushToList,
         selectedTask,
         setSelectedTask,
+        getCurrentProject,
+        isListView,
+        setIsListView,
+        sortBy,
+        setSortBy,
+        reverseSort,
+        setReverseSort,
+        filters: {
+          isFiltersShown,
+          setIsFiltersShown,
+          filteredLists,
+          setFilteredLists,
+          filteredStartDate,
+          setFilteredStartDate,
+          filteredEndDate,
+          setFilteredEndDate,
+          filteredPriority,
+          setFilteredPriority,
+        },
       }}
     >
       {children}

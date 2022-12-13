@@ -1,6 +1,6 @@
 import React from 'react'
 import SmallButtonCollapse from './SmallButtonCollapse'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 import SmallButtonColorWheel from './SmallButtonColorWheel'
 import { TList } from '../../providers/KanbanProvider'
 

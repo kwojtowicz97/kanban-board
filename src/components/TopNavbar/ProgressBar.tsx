@@ -22,8 +22,6 @@ const ProgressBar = () => {
 
   const finishedTasks = currentProj.lists[noOfLists - 1].tasks.length
 
-  console.log(allTasks.length, finishedTasks)
-
   if (finishedTasks / allTasks.length - progress > 0.005) {
     setTimeout(() => setProgress((state) => state + 0.002), 5)
   } else if (finishedTasks / allTasks.length - progress < -0.005) {

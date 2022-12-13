@@ -1,13 +1,12 @@
-import { useContext, useRef } from 'react'
+import React, { useContext } from 'react'
 import {
   KanbanContext,
   priorityColors,
   TTask,
 } from '../../providers/KanbanProvider'
-import RichTextEditor from '../RichTextEditor/RichTextEditor'
 import styles from './TaskCard.module.css'
 import useTaskFormData from './useTaskFormData'
-import { Form, InputField, SelectField } from './Form'
+import { Form, InputField, RichTextEditorField, SelectField } from './Form'
 
 type TTaskCard = {
   task?: TTask
@@ -29,31 +28,18 @@ const TaskCard = ({ task }: TTaskCard) => {
     (project) => project.projectName === currentProject
   )
 
-  const addTaskHandler = () => {
-    addNewTask(
-      {
-        title: formData.titleInput,
-        description: formData.editorState,
-        priority: formData.priorityInput,
-        date: formData.dateInput,
-        list: formData.columnInput,
-      },
-      formData.columnInput
-    )
-  }
-
-  const updateTaskHandler = () => {
-    updateTask(
-      task!,
-      {
-        title: formData.titleInput,
-        description: formData.editorState,
-        priority: formData.priorityInput,
-        date: formData.dateInput,
-        list: formData.columnInput,
-      },
-      formData.columnInput
-    )
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const data = {
+      title: formData.titleInput,
+      description: formData.editorState,
+      priority: formData.priorityInput,
+      date: formData.dateInput,
+      list: formData.columnInput,
+    }
+    !!task
+      ? updateTask(task!, data, formData.columnInput)
+      : addNewTask(data, formData.columnInput)
   }
 
   const closeHandler = () => {
@@ -66,7 +52,7 @@ const TaskCard = ({ task }: TTaskCard) => {
       <div className={styles.backshadow} />
       <div className={styles.card}>
         <Form
-          submitHanddler={!!task ? updateTaskHandler : addTaskHandler}
+          submitHandler={submitHandler}
           closeHandler={closeHandler}
           submitButtonText={!!task ? 'Update task' : 'Add task'}
         >
@@ -78,13 +64,12 @@ const TaskCard = ({ task }: TTaskCard) => {
             onChange={handleChange}
             required
           />
-          <div className={[styles.inputGroup].join(' ')}>
-            <label htmlFor='taks-name-input'>Task description</label>
-            <RichTextEditor
-              value={formData.editorState}
-              onChange={handleEditorChange}
-            />
-          </div>
+          <RichTextEditorField
+            label='Task description'
+            name='descriptionInput'
+            onChange={handleEditorChange}
+            value={formData.editorState}
+          />
           <SelectField
             label='Column'
             name='columnInput'

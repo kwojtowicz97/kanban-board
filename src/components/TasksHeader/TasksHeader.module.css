@@ -1,0 +1,29 @@
+.header {
+    height: var(--kanbanHeaderHeight);
+    display: flex;
+    justify-content: flex-start;
+    background-color: white;
+    align-items: center;
+}
+
+.rightMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2rem;
+    margin-left: auto;
+}
+
+.leftMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.sortWrapper {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.100)
+}
+

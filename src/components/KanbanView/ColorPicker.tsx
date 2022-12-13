@@ -1,6 +1,6 @@
 import React from 'react'
 import ColorCircle from './ColorCircle'
-import styles from './KanbanGroup.module.css'
+import styles from './KanbanView.module.css'
 
 type TColorPickerProps = {
   badge: string

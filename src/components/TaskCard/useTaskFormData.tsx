@@ -15,8 +15,7 @@ type FormData = {
 }
 
 const useTaskFormData = (task?: TTask) => {
-  const { projects, currentProject, addNewTask, updateTask } =
-    useContext(KanbanContext)
+  const { projects, currentProject } = useContext(KanbanContext)
 
   const currentProj = projects.find(
     (project) => project.projectName === currentProject
@@ -26,7 +25,7 @@ const useTaskFormData = (task?: TTask) => {
     titleInput: task?.title || '',
     editorState: task?.description || EditorState.createEmpty(),
     columnInput: task?.list || currentProj?.lists[0].badge || '',
-    priorityInput: task?.priority || 'low',
+    priorityInput: task?.priority || 'Low',
     dateInput: task?.date || new Date().toISOString().substring(0, 10),
   })
 

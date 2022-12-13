@@ -21,7 +21,9 @@ body {
   --transparentBorder: 1px solid transparent;
   --listWidth: 320px;
   --leftSidebarWidth: 220px;
-  --listTopBandHeight: 45px
+  --listTopBandHeight: 45px;
+  --lightGreen: #c7dad6;
+  --orangeBorder: 1px solid var(--mainOrange);
 }
 
 html,

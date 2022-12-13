@@ -12,8 +12,8 @@ export const data: TProject[] = [
         tasks: [
           {
             title: 'First task',
-            date: '22-11-2022',
-            priority: 'high',
+            date: '2022-12-20',
+            priority: 'High',
             list: 'Open',
           },
         ],
@@ -26,14 +26,14 @@ export const data: TProject[] = [
         tasks: [
           {
             title: 'Second task',
-            date: '22-11-2022',
-            priority: 'low',
+            date: '2022-12-20',
+            priority: 'Low',
             list: 'In progress',
           },
           {
             title: 'Test task',
-            date: '22-11-2022',
-            priority: 'low',
+            date: '2022-12-20',
+            priority: 'Low',
             list: 'In progress',
           },
         ],
@@ -46,8 +46,8 @@ export const data: TProject[] = [
         tasks: [
           {
             title: 'Third task',
-            date: '22-11-2022',
-            priority: 'medium',
+            date: '2022-12-20',
+            priority: 'Medium',
             list: 'Testing',
           },
         ],
