@@ -14,6 +14,7 @@ const TopBand = ({ list }: TTopBand) => {
   const [listName, setListName] = useState(list.badge)
   const [isNameExists, setIsNameExists] = useState(false)
   const blurHandler = () => {
+    if (listName === list.badge) return
     if (
       listName &&
       !getCurrentProject()?.lists.some((list) => list.badge === listName)

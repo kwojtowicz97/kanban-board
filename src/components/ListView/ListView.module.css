@@ -2,6 +2,7 @@
     padding: 2rem 2rem;
     height: calc(100% - var(--topHeaderHeight) - var(--kanbanHeaderHeight));
     /* background: var(--lightGreen); */
+    overflow-y: scroll;
 }
 
 .tasksList {

@@ -52,7 +52,7 @@ const TasksHeader = () => {
           </>
         ) : null}
       </div>
-      <FiltersPreview />
+      {isListView ? <FiltersPreview /> : null}
       <div className={styles.rightMenu}>
         <ViewSelect />
         <NewTaskButton />
