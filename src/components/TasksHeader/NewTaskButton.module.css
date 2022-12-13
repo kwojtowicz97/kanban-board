@@ -7,4 +7,22 @@
     background-color: var(--mainOrange);
     border-radius: 19px;
     cursor: pointer;
+    position: relative;
+}
+
+.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.disabled:hover::after {
+    content: 'You have to add lists to your board first';
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width:max-content;
+    background: white;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 5px;
 }

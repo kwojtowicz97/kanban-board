@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { data } from '../data'
 import { EditorState } from 'draft-js'
 
@@ -35,7 +35,7 @@ export type TList = {
 
 export type TProject = {
   projectName: string
-  lists: TList[]
+  lists: TList[] | [TList, ...TList[]]
 }
 
 export type TKanbanContext = {
@@ -55,12 +55,14 @@ export type TKanbanContext = {
   selectedTask: TTask | null
   setSelectedTask: Dispatch<SetStateAction<TTask | null>> | null
   getCurrentProject: () => TProject | undefined
+  addNewProject: () => void
   isListView: boolean
   setIsListView: Dispatch<SetStateAction<boolean>> | null
   sortBy: TSortBy
   setSortBy: Dispatch<SetStateAction<TSortBy>> | null
   reverseSort: boolean
   setReverseSort: Dispatch<SetStateAction<boolean>> | null
+  projectNameRef: React.MutableRefObject<HTMLInputElement | null> | null
   filters: {
     isFiltersShown: boolean
     setIsFiltersShown: Dispatch<SetStateAction<boolean>> | null
@@ -92,12 +94,14 @@ export const KanbanContext = React.createContext<TKanbanContext>({
   selectedTask: null,
   setSelectedTask: null,
   getCurrentProject: () => undefined,
+  addNewProject: () => {},
   isListView: false,
   setIsListView: null,
   sortBy: 'title',
   setSortBy: null,
   reverseSort: false,
   setReverseSort: null,
+  projectNameRef: null,
   filters: {
     isFiltersShown: false,
     setIsFiltersShown: null,
@@ -129,8 +133,25 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
   const [filteredEndDate, setFilteredEndDate] = useState<string>('')
   const [filteredPriority, setFilteredPriority] = useState<string[]>([])
 
+  const projectNameRef = useRef<HTMLInputElement | null>(null)
+
   const getCurrentProject = () => {
-    return projects.find((project) => project.projectName === currentProject)
+    const current = projects.find(
+      (project) => project.projectName === currentProject
+    )
+    if (!current) throw new Error('Project not found')
+    return current
+  }
+
+  const addNewProject = () => {
+    const name = `New project #${Math.ceil(Math.random() * 1000)}`
+    setProjects((state) => {
+      const newState = [...state]
+      newState.push({ projectName: name, lists: [] })
+      return newState
+    })
+    setCurrentProject(name)
+    projectNameRef.current?.focus()
   }
 
   const toggleIsCollapsed = (badgeName: string) => {
@@ -344,12 +365,14 @@ const KanbanProvider = ({ children }: TKanbanProviderProps) => {
         selectedTask,
         setSelectedTask,
         getCurrentProject,
+        addNewProject,
         isListView,
         setIsListView,
         sortBy,
         setSortBy,
         reverseSort,
         setReverseSort,
+        projectNameRef,
         filters: {
           isFiltersShown,
           setIsFiltersShown,

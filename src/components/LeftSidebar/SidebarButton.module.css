@@ -8,6 +8,11 @@
     color: #ccc;
 }
 
+.newTask {
+    background: #ffffff14;
+    border-radius: 5px;
+}
+
 .sidebarButton:hover {
     background: #ffffff42;
     border-radius: 0.2rem;

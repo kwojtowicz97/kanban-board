@@ -6,7 +6,8 @@ import WarningTooltip from './WarningTooltip'
 const PLACEHOLDER = 'Your project name'
 
 const ProjectName = () => {
-  const { setProjectName, currentProject, projects } = useContext(KanbanContext)
+  const { setProjectName, currentProject, projects, projectNameRef } =
+    useContext(KanbanContext)
   const [projectNameInput, setProjectNameInput] =
     useState<string>(currentProject)
 
@@ -48,7 +49,9 @@ const ProjectName = () => {
   return (
     <form onSubmit={submitHandler}>
       <input
+        ref={projectNameRef}
         placeholder={PLACEHOLDER}
+        id='project-name'
         className={styles.projectName}
         size={
           projectNameInput

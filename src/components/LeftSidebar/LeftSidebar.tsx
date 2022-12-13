@@ -6,7 +6,8 @@ import ProjectsList from './ProjectsList'
 import SidebarButton from './SidebarButton'
 
 const LeftSidebar = () => {
-  const { projects, setCurrentProject } = useContext(KanbanContext)
+  const { projects, setCurrentProject, addNewProject } =
+    useContext(KanbanContext)
   return (
     <div className={styles.leftSidebar}>
       <Logo />
@@ -19,6 +20,12 @@ const LeftSidebar = () => {
             projectName={project.projectName}
           />
         ))}
+        <SidebarButton
+          newTask
+          key='new-task'
+          onClick={addNewProject!}
+          projectName='Add new project'
+        />
       </ProjectsList>
     </div>
   )
